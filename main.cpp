@@ -18,12 +18,14 @@ void traverse_nfa(edge<nfa_node>* start);
 
 typedef nfa<nfa_node, edge<nfa_node>> t_nfa;
 
+typedef void (*handlr)(int);
+
 void connect_nfa(t_nfa previous, t_nfa next)
 {
     previous._end->push_started(next._start);
 }
 
-t_nfa get_a(string input)
+t_nfa get_a(string input, bool accept = false, handlr accept_handlr = nullptr)
 {
     nfa_node* a_node = new nfa_node(false, "");
     edge<nfa_node>* a_edge = new edge<nfa_node>(0, a_node, input);
@@ -76,11 +78,12 @@ t_nfa get_M_star(t_nfa M)
     t_nfa start_nfa = get_Epsilon();
     connect_nfa(start_nfa, M);
     
-    edge<nfa_node>* e_edge = new edge<nfa_node>(0, e_node, CC_EPSILON);
+    edge<nfa_node>* e_edge = new edge<nfa_node>(M._end, start_nfa._end, CC_EPSILON);
     M._end->push_started(e_edge);
     start_nfa._end->push_terminated(e_edge);
     
     t_nfa ms = t_nfa(start_nfa._start, start_nfa._end);
+    return ms;
 }
 
 t_nfa get_M_plus(t_nfa M)
@@ -103,11 +106,13 @@ t_nfa get_M_question(t_nfa M)
 t_nfa get_or_list(list<string> sym_list)
 {
     //to_do
+    return get_Epsilon();
 }
 
 t_nfa get_and_list(list<string> sym_list)
 {
     //to_do
+    return get_Epsilon();
 }
 
 int main(int argc, const char * argv[])
