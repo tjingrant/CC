@@ -18,36 +18,18 @@ using namespace std;
 class nfa_node
 {
 public:
-    nfa_node(bool accept, string symbol, list<edge<nfa_node>*> terminated, list<edge<nfa_node>*> started): _accept(accept), _symbol(symbol), _terminated(terminated), _started(started)
-    {
-        
-    }
+    nfa_node(bool accept, string symbol, list<edge<nfa_node>*> terminated, list<edge<nfa_node>*> started);
     
-    nfa_node(bool accept, string symbol): _accept(accept), _symbol(symbol)
-    {
-        _terminated = list<edge<nfa_node>*>();
-        _started = list<edge<nfa_node>*>();
-    }
+    nfa_node(bool accept, string symbol);
     
-    void push_terminated(edge<nfa_node>* edge) {
-        _terminated.push_back(edge);
-        edge->set_to(this);
-    }
+    void push_terminated(edge<nfa_node>* edge);
     
-    void push_started(edge<nfa_node>* edge) {
-        _started.push_back(edge);
-        edge->set_from(this);
-    }
+    void push_started(edge<nfa_node>* edge);
     
-    list<edge<nfa_node>*> get_terminated()
-    {
-        return _terminated;
-    }
+    list<edge<nfa_node>*> get_terminated();
     
-    list<edge<nfa_node>*> get_started()
-    {
-        return _started;
-    }
+    list<edge<nfa_node>*> get_started();
+
 private:
     bool _accept;
     string _symbol;

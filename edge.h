@@ -42,6 +42,11 @@ public:
     {
         return _from;
     }
+    
+    string get_input()
+    {
+        return _input;
+    }
 private:
     T* _from;
     T* _to;
