@@ -8,37 +8,11 @@
 
 #include <iostream>
 #include <list>
+#include "edge.h"
 
 using namespace std;
 
-template <class T>
-class edge
-{
-public:
-    edge(T* from, T* to, string input): _from(from), _to(to), _input(input)
-    {
-    }
-    void set_to(T* to)
-    {
-        _to = to;
-    }
-    void set_from(T* from)
-    {
-        _from = from;
-    }
-    T* get_to()
-    {
-        return _to;
-    }
-    T* get_from()
-    {
-        return _from;
-    }
-private:
-    T* _from;
-    T* _to;
-    string _input;
-};
+
 
 class nfa_node
 {
@@ -88,7 +62,6 @@ void traverse_nfa(edge<nfa_node>* start)
 
 int main(int argc, const char * argv[])
 {
-//    //for type a
     nfa_node* a_node = new nfa_node(false, "");
     edge<nfa_node>* a_edge = new edge<nfa_node>(0, a_node, "a");
     a_node->push_terminated(a_edge);
@@ -96,9 +69,9 @@ int main(int argc, const char * argv[])
     edge<nfa_node>* e_edge = new edge<nfa_node>(0, e_node, "e");
     a_node->push_started(e_edge);
     e_node->push_terminated(e_edge);
+    
     traverse_nfa(a_edge);
     
-    std::cout << "Hello, World!\n";
     return 0;
 }
 
