@@ -11,6 +11,7 @@
 #include "edge.h"
 #include "nfa_node.h"
 #include "def.h"
+#include "lex.h"
 
 using namespace std;
 
@@ -103,20 +104,13 @@ t_nfa get_M_question(t_nfa M)
     return mq;
 }
 
-t_nfa get_or_list(list<string> sym_list)
-{
-    //to_do
-    return get_Epsilon();
-}
 
-t_nfa get_and_list(list<string> sym_list)
-{
-    //to_do
-    return get_Epsilon();
-}
 
 int main(int argc, const char * argv[])
 {
+    string regex = "(f)";
+    analyze(regex);
+    
     t_nfa nfa_a = get_a("a");
     t_nfa nfa_e = get_a("e");
     

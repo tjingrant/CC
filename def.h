@@ -11,6 +11,10 @@
 
 #define CC_EPSILON ""
 
+#include <string>
+
+using namespace std;
+
 template<class node, class edge>
 class nfa {
 public:
@@ -19,6 +23,20 @@ public:
     }
     node* _end;
     edge* _start;
+};
+
+enum LEX_TOKEN {
+    TOKEN_NOT_FOUND,
+    TOKEN_LPAREN,
+    TOKEN_RPAREN,
+    TOKEN_ASTERISK,
+    TOKEN_QUESTION_MARK,
+    TOKEN_PIPE
+};
+
+class lex_parcel {
+    LEX_TOKEN type;
+    string val;
 };
 
 #endif
