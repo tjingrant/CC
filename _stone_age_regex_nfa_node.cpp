@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 Tian Jin. All rights reserved.
 //
 
-#include "nfa_node.h"
+#include "_stone_age_regex_nfa_node.h"
 
 nfa_node::nfa_node(bool accept, string symbol, list<edge<nfa_node>*> terminated, list<edge<nfa_node>*> started): _accept(accept), _symbol(symbol), _terminated(terminated), _started(started)
 {
@@ -37,4 +37,14 @@ list<edge<nfa_node>*> nfa_node::get_terminated()
 list<edge<nfa_node>*> nfa_node::get_started()
 {
     return _started;
+}
+
+void nfa_node::set_accept()
+{
+    _accept = true;
+}
+
+bool nfa_node::get_accpet()
+{
+    return _accept;
 }

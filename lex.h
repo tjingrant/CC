@@ -6,14 +6,6 @@
 //  Copyright (c) 2014年 Tian Jin. All rights reserved.
 //
 
-//E -> literal
-//E -> E literal
-//E -> ( E )
-//E -> E | E
-//E -> E*
-//E -> E+
-//E -> E?
-
 #ifndef __CC__lex__
 #define __CC__lex__
 
@@ -21,7 +13,7 @@
 #include <map>
 #include <string>
 #include <list>
-#include "def.h"
+#include "_stone_age_regex_def.h"
 
 #define CHECK_AND_RETURN(TO_CHECK,TO_RETURN)      \
 do {\

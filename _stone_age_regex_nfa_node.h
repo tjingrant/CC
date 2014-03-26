@@ -10,7 +10,7 @@
 #define __CC__nfa_node__
 
 #include <iostream>
-#include "edge.h"
+#include "_stone_age_regex_edge.h"
 #include <list>
 
 using namespace std;
@@ -30,6 +30,9 @@ public:
     
     list<edge<nfa_node>*> get_started();
 
+    void set_accept();
+    
+    bool get_accpet();
 private:
     bool _accept;
     string _symbol;

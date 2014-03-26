@@ -10,7 +10,7 @@
 #define __CC__grammar__
 
 #include <iostream>
-#include "def.h"
+#include "_stone_age_regex_def.h"
 #include <list>
 
 typedef list<lex_parcel> lex_stack;

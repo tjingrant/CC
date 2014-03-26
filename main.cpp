@@ -8,16 +8,14 @@
 
 #include <iostream>
 #include <list>
-#include "edge.h"
-#include "nfa_node.h"
-#include "def.h"
-#include "lex.h"
+#include "_stone_age_regex_edge.h"
+#include "_stone_age_regex_nfa_node.h"
+#include "_stone_age_regex_def.h"
 
 using namespace std;
 
 bool traverse_nfa(edge<nfa_node>* start, string input, int index);
 void traverse_debug(edge<nfa_node>* start);
-void analyze(string s);
 
 typedef nfa<nfa_node, edge<nfa_node>> t_nfa;
 
@@ -108,22 +106,21 @@ t_nfa* get_M_question(t_nfa* M)
 
 int main(int argc, const char * argv[])
 {
-    string regex = "(f)";
-    analyze(regex);
-    
-    string input = "af";
+    string input = "aaa";
     t_nfa* nfa_a = get_a("a");
     t_nfa* nfa_e = get_a("e");
     t_nfa* nfa_f = get_a("f");
     
-    t_nfa* mn = get_M_or_N(nfa_a, nfa_e);
-    t_nfa* mn2 = get_M_and_N(mn, nfa_f);
+    t_nfa* nfa_a_star = get_M_star(nfa_a);
+    nfa_a_star->_end->set_accept();
+//    t_nfa* mn = get_M_or_N(nfa_a, nfa_e);
+//    t_nfa* mn2 = get_M_and_N(mn, nfa_f);
     
     cout << "==debug session start==" << endl;
-    traverse_debug(mn2->_start);
+    //traverse_debug(mn2->_start);
     cout << "==debug session end==" << endl;
     
-    bool match = traverse_nfa(mn2->_start, input, 0);
+    bool match = traverse_nfa(nfa_a_star->_start, input, 0);
     
     if (match)
         cout << "Match";

@@ -6,8 +6,8 @@
 //  Copyright (c) 2014年 Tian Jin. All rights reserved.
 //
 
-#include "traverse.h"
-#include "def.h"
+#include "_stone_age_regex_traverse.h"
+#include "_stone_age_regex_def.h"
 #include <list>
 #include <string>
 #include <map>
@@ -42,8 +42,12 @@ bool traverse_nfa(edge<nfa_node>* start, string to_parse, int index)
     if (node == 0)
         return true;
     
-    if (index >= to_parse.length() && (start->get_input() != CC_EPSILON))
-        return false;
+    if (index >= to_parse.length() && (start->get_input() != CC_EPSILON)) {
+        if (start->get_from() == nullptr)
+            return false;
+        return start->get_from()->get_accpet() ? true : false;
+    }
+    
     
     if (start->get_input() == CC_EPSILON)
     {
