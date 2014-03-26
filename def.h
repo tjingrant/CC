@@ -18,7 +18,7 @@ using namespace std;
 template<class node, class edge>
 class nfa {
 public:
-    nfa(edge* start,node* end):_end(end), _start(start)
+    nfa(edge* start, node* end):_end(end), _start(start)
     {
     }
     node* _end;
@@ -31,12 +31,20 @@ enum LEX_TOKEN {
     TOKEN_RPAREN,
     TOKEN_ASTERISK,
     TOKEN_QUESTION_MARK,
-    TOKEN_PIPE
+    TOKEN_PIPE,
+    TOKEN_LSQUARE,
+    TOKEN_RSQUARE,
+    TOKEN_LITERAL
 };
 
 class lex_parcel {
-    LEX_TOKEN type;
-    string val;
+public:
+    lex_parcel(LEX_TOKEN type, char val): _type(type), _val(val)
+    {
+    
+    }
+    LEX_TOKEN _type;
+    char _val;
 };
 
 #endif

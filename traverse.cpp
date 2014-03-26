@@ -7,11 +7,22 @@
 //
 
 #include "traverse.h"
+#include "def.h"
 #include <list>
 #include <string>
 #include <map>
+#include <sstream>
 
 using namespace std;
+
+string char_to_string(char c)
+{
+    stringstream ss;
+    string s;
+    ss << c;
+    ss >> s;
+    return s;
+}
 
 void print_symbol(string sym)
 {
@@ -23,12 +34,61 @@ void print_symbol(string sym)
     cout << sym << endl;
 }
 
-void traverse_nfa(edge<nfa_node>* start)
+bool traverse_nfa(edge<nfa_node>* start, string to_parse, int index)
+{
+    print_symbol(start->get_input());
+    nfa_node* node = start->get_to();
+    
+    if (node == 0)
+        return true;
+    
+    if (index >= to_parse.length() && (start->get_input() != CC_EPSILON))
+        return false;
+    
+    if (start->get_input() == CC_EPSILON)
+    {
+        bool result = false;
+        
+        for (auto edge : node->get_started())
+        {
+            result = result || traverse_nfa(edge, to_parse, index);
+        }
+
+        if (node->get_started().size() == 0)
+            return true;
+        
+        return result;
+    }
+    
+    string symbol, to_match;
+    symbol = start->get_input();
+    to_match = char_to_string(to_parse.at(index));
+    int cmp = symbol.compare(to_match);
+    if (symbol == to_match)
+    {
+        bool result = false;
+    
+        for (auto edge : node->get_started())
+        {
+            result = result || traverse_nfa(edge, to_parse, index + 1);
+        }
+
+        if (node->get_started().size() == 0)
+            return true;
+        
+        return result;
+    }
+    
+    return false;
+}
+
+void traverse_debug(edge<nfa_node>* start)
 {
     print_symbol(start->get_input());
     nfa_node* node = start->get_to();
     for (auto edge : node->get_started())
     {
-        traverse_nfa(edge);
+        traverse_debug(edge);
     }
+
 }
