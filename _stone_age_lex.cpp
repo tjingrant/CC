@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 Tian Jin. All rights reserved.
 //
 
-#include "lex.h"
+#include "_stone_age_lex.h"
 
 void analyze(string s)
 {
@@ -36,6 +36,9 @@ void analyze(string s)
         },
         [] (char c, lex_stack* stack, int pos) -> LEX_TOKEN {
             CHECK_AND_RETURN(']', TOKEN_RSQUARE);
+        },
+        [] (char c, lex_stack* stack, int pos) -> LEX_TOKEN {
+            CHECK_AND_RETURN('-', TOKEN_RSQUARE);
         },
         [] (char c, lex_stack* stack, int pos) -> LEX_TOKEN {
             stack->push_back(lex_parcel(LEX_TOKEN::TOKEN_LITERAL, c));
