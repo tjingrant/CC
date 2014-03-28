@@ -12,17 +12,24 @@
 #include "_stone_age_regex_nfa_node.h"
 #include "_stone_age_regex_def.h"
 #include "_stone_age_thompsons_construction.h"
+#include "_stone_age_lex.h"
+#include "_stone_age_grammar.h"
 
 using namespace std;
 
 bool traverse_nfa(edge<nfa_node>* start, string input, int index);
 void traverse_debug(edge<nfa_node>* start);
-
-typedef nfa<nfa_node, edge<nfa_node>> t_nfa;
+t_nfa* analyze_grammar(lex_stack input);
 
 int main(int argc, const char * argv[])
 {
-    thompsons_construction::get_a("a");
+    string input = "ab-a-b-c-d-f-e-";
+    string to_test = "ababcdf";
+    t_nfa* nfa = analyze_grammar(analyze(input));
+    traverse_debug(nfa->_start);
+    bool match = traverse_nfa(nfa->_start,to_test, 0);
+    cout << match;
+//    thompsons_construction::get_a("a");
 //    string input = "aaa";
 //    t_nfa* nfa_a = get_a("a");
 //    t_nfa* nfa_e = get_a("e");

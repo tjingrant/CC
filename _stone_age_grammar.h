@@ -11,10 +11,13 @@
 
 #include <iostream>
 #include "_stone_age_regex_def.h"
+#include "_stone_age_thompsons_construction.h"
 #include <list>
+
+using namespace std;
 
 typedef list<lex_parcel> lex_stack;
 
-void analyze_grammar(lex_stack input);
+t_nfa* analyze_grammar(lex_stack* input);
 
 #endif /* defined(__CC__grammar__) */

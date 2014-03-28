@@ -12,6 +12,7 @@
 #define CC_EPSILON ""
 
 #include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -47,5 +48,14 @@ public:
     LEX_TOKEN _type;
     char _val;
 };
+
+static string char_to_string(char c)
+{
+    stringstream ss;
+    string s;
+    ss << c;
+    ss >> s;
+    return s;
+}
 
 #endif

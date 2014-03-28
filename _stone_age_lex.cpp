@@ -8,7 +8,7 @@
 
 #include "_stone_age_lex.h"
 
-void analyze(string s)
+lex_stack* analyze(string s)
 {
     lex_stack* stack = new lex_stack();
     
@@ -38,7 +38,7 @@ void analyze(string s)
             CHECK_AND_RETURN(']', TOKEN_RSQUARE);
         },
         [] (char c, lex_stack* stack, int pos) -> LEX_TOKEN {
-            CHECK_AND_RETURN('-', TOKEN_RSQUARE);
+            CHECK_AND_RETURN('-', TOKEN_CONNECT);
         },
         [] (char c, lex_stack* stack, int pos) -> LEX_TOKEN {
             stack->push_back(lex_parcel(LEX_TOKEN::TOKEN_LITERAL, c));
@@ -55,4 +55,5 @@ void analyze(string s)
         }
         pos++;
     }
+    return stack;
 }

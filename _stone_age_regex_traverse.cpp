@@ -15,15 +15,6 @@
 
 using namespace std;
 
-string char_to_string(char c)
-{
-    stringstream ss;
-    string s;
-    ss << c;
-    ss >> s;
-    return s;
-}
-
 void print_symbol(string sym)
 {
     map<string, string> replace_list = {{"", "{EPSILON}"}};

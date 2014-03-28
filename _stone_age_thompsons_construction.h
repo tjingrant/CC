@@ -19,6 +19,7 @@ typedef nfa<nfa_node, edge<nfa_node>> t_nfa;
 class thompsons_construction
 {
 public:
+    
     static void connect_nfa(t_nfa* previous, t_nfa* next);
     
     

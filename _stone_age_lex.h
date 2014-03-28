@@ -31,7 +31,7 @@ using namespace std;
 typedef list<lex_parcel> lex_stack;
 typedef LEX_TOKEN (*lex_handlr)(char, lex_stack*, int);
 
-void analyze(string s);
+lex_stack* analyze(string s);
 
 
 #endif /* defined(__CC__lex__) */
