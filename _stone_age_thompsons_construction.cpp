@@ -76,7 +76,8 @@ t_nfa* thompsons_construction::get_M_star(t_nfa* M)
 
 t_nfa* thompsons_construction::get_M_plus(t_nfa* M)
 {
-    t_nfa* M_star = get_M_star(M);
+    t_nfa* M_duplicate = new t_nfa(*M);
+    t_nfa* M_star = get_M_star(M_duplicate);
     connect_nfa(M, M_star);
     
     t_nfa* mp = new t_nfa(M->_start, M_star->_end);

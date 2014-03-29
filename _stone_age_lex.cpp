@@ -20,9 +20,6 @@ lex_stack* analyze(string s)
             CHECK_AND_RETURN(')', TOKEN_RPAREN);
         },
         [] (char c, lex_stack* stack, int pos) -> LEX_TOKEN {
-            CHECK_AND_RETURN('+', TOKEN_RPAREN);
-        },
-        [] (char c, lex_stack* stack, int pos) -> LEX_TOKEN {
             CHECK_AND_RETURN('?', TOKEN_QUESTION_MARK);
         },
         [] (char c, lex_stack* stack, int pos) -> LEX_TOKEN {
@@ -39,6 +36,9 @@ lex_stack* analyze(string s)
         },
         [] (char c, lex_stack* stack, int pos) -> LEX_TOKEN {
             CHECK_AND_RETURN('-', TOKEN_CONNECT);
+        },
+        [] (char c, lex_stack* stack, int pos) -> LEX_TOKEN {
+            CHECK_AND_RETURN('+', TOKEN_PLUS);
         },
         [] (char c, lex_stack* stack, int pos) -> LEX_TOKEN {
             stack->push_back(lex_parcel(LEX_TOKEN::TOKEN_LITERAL, c));

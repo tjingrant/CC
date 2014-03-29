@@ -36,13 +36,44 @@ t_nfa* analyze_grammar(lex_stack* input)
                 nfa_stack.push_front(thompsons_construction::get_M_and_N(before, after));
                 break;
             }
+            case TOKEN_PIPE: {
+                CC_DEBUG_OUT("|");
+                t_nfa* after = nfa_stack.front();
+                nfa_stack.pop_front();
+                t_nfa* before = nfa_stack.front();
+                nfa_stack.pop_front();
+                nfa_stack.push_front(thompsons_construction::get_M_or_N(before, after));
+                break;
+            }
+            case TOKEN_QUESTION_MARK: {
+                CC_DEBUG_OUT("?");
+                t_nfa* item = nfa_stack.front();
+                nfa_stack.pop_front();
+                nfa_stack.push_front(thompsons_construction::get_M_question(item));
+                break;
+            }
+            case TOKEN_ASTERISK: {
+                CC_DEBUG_OUT("*");
+                t_nfa* item = nfa_stack.front();
+                nfa_stack.pop_front();
+                nfa_stack.push_front(thompsons_construction::get_M_star(item));
+                break;
+            }
+            case TOKEN_PLUS: {
+                CC_DEBUG_OUT("+");
+                t_nfa* item = nfa_stack.front();
+                nfa_stack.pop_front();
+                nfa_stack.push_front(thompsons_construction::get_M_plus(item));
+                break;
+            }
             default: {
                 break;
             }
         }
     }
-    
     CC_DEBUG_OUT("==== SEMANTIC ANALYSIS ENDS HERE ====")
     
+    t_nfa* nfa = nfa_stack.front();
+    nfa->_end->set_accept();
     return nfa_stack.front();
 }

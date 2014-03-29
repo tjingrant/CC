@@ -25,41 +25,41 @@ string print_symbol(string sym)
     return sym;
 }
 
-bool traverse_nfa(edge<nfa_node>* start, string to_parse, int index)
+int traverse_nfa(edge<nfa_node>* start, string to_parse, int index)
 {
     CC_DEBUG_OUT("The nfa just went by: " + start->get_input());
-
+    CC_DEBUG_OUT("CURRENT INDEX:" << index);
     //next node to examine
     nfa_node* node = start->get_to();
     
     //running to the end of the nfa
     if (node == 0)
-        return true;
+        return index;
     
     //reaching the end of to_parse while not the end of the nfa
     if (index >= to_parse.length() && (start->get_input() != CC_EPSILON)) {
         
         //making sure it has a source because the source will be tested for accpet states
         if (start->get_from() == nullptr)
-            return false;
-        return start->get_from()->get_accpet() ? true : false;
+            return -1;
+        return start->get_from()->get_accpet() ? index : -1;
         
     }
     
     
     if (start->get_input() == CC_EPSILON)
     {
-        bool result = false;
+        int result = -1;
         
         for (auto edge : node->get_started())
         {
-            result = result || traverse_nfa(edge, to_parse, index);
+            result = std::max(result, traverse_nfa(edge, to_parse, index));
         }
 
         if (node->get_started().size() == 0)
-            return true;
+            return index - 1; //To Check
         
-        return result;
+        return result; //To Check
     }
     
     //todo: why this doesn't work????
@@ -69,29 +69,30 @@ bool traverse_nfa(edge<nfa_node>* start, string to_parse, int index)
     int cmp = symbol.compare(to_match);
     if (symbol == to_match)
     {
-        bool result = false;
-    
+        int result = -1;
+        
         for (auto edge : node->get_started())
         {
-            result = result || traverse_nfa(edge, to_parse, index + 1);
+            result = std::max(result, traverse_nfa(edge, to_parse, index + 1));
         }
-
+        
         if (node->get_started().size() == 0)
-            return true;
+            return index;
         
         return result;
     }
     
-    return false;
+    return -1;
 }
 
-void traverse_debug(edge<nfa_node>* start)
+void traverse_debug(edge<nfa_node>* start, int max, int current)
 {
+    if (current >= max) return;
     CC_DEBUG_OUT(start->get_input());
     nfa_node* node = start->get_to();
     for (auto edge : node->get_started())
     {
-        traverse_debug(edge);
+        traverse_debug(edge, max, current + 1);
     }
 
 }

@@ -13,8 +13,8 @@
 #include "_stone_age_regex_edge.h"
 #include "_stone_age_regex_nfa_node.h"
 
-bool traverse_nfa(edge<nfa_node>* start, string to_parse, int index);
+int traverse_nfa(edge<nfa_node>* start, string to_parse, int index);
 
-void traverse_debug(edge<nfa_node>* start);
+void traverse_debug(edge<nfa_node>* start, int max = 1000, int current = 0);
 
 #endif /* defined(__CC__traverse__) */

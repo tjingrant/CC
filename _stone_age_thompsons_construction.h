@@ -37,6 +37,7 @@ public:
     static t_nfa* get_M_plus(t_nfa* M);
     
     static t_nfa* get_M_question(t_nfa* M);
+
 };
 
 
