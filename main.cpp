@@ -27,29 +27,8 @@ int main(int argc, const char * argv[])
     string to_test = "ababcdf";
     t_nfa* nfa = analyze_grammar(analyze(input));
     traverse_debug(nfa->_start);
-    bool match = traverse_nfa(nfa->_start,to_test, 0);
-    cout << match;
-//    thompsons_construction::get_a("a");
-//    string input = "aaa";
-//    t_nfa* nfa_a = get_a("a");
-//    t_nfa* nfa_e = get_a("e");
-//    t_nfa* nfa_f = get_a("f");
-//    
-//    t_nfa* nfa_a_star = get_M_star(nfa_a);
-//    nfa_a_star->_end->set_accept();
-////    t_nfa* mn = get_M_or_N(nfa_a, nfa_e);
-////    t_nfa* mn2 = get_M_and_N(mn, nfa_f);
-//    
-//    cout << "==debug session start==" << endl;
-//    //traverse_debug(mn2->_start);
-//    cout << "==debug session end==" << endl;
-//    
-//    bool match = traverse_nfa(nfa_a_star->_start, input, 0);
-//    
-//    if (match)
-//        cout << "Match";
-//    else
-//        cout << "Doesn't Match";
+    for (int i = 0; i<1; i++)
+        cout << traverse_nfa(nfa->_start,to_test, 0);
     
     return 0;
 }

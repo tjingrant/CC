@@ -16,4 +16,5 @@
 bool traverse_nfa(edge<nfa_node>* start, string to_parse, int index);
 
 void traverse_debug(edge<nfa_node>* start);
+
 #endif /* defined(__CC__traverse__) */

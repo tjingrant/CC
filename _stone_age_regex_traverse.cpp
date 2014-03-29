@@ -15,28 +15,35 @@
 
 using namespace std;
 
-void print_symbol(string sym)
+string print_symbol(string sym)
 {
     map<string, string> replace_list = {{"", "{EPSILON}"}};
     if ((replace_list.count(sym) != 0))
     {
         sym = replace_list[sym];
     }
-    cout << sym << endl;
+    return sym;
 }
 
 bool traverse_nfa(edge<nfa_node>* start, string to_parse, int index)
 {
-    print_symbol(start->get_input());
+    CC_DEBUG_OUT("The nfa just went by: " + start->get_input());
+
+    //next node to examine
     nfa_node* node = start->get_to();
     
+    //running to the end of the nfa
     if (node == 0)
         return true;
     
+    //reaching the end of to_parse while not the end of the nfa
     if (index >= to_parse.length() && (start->get_input() != CC_EPSILON)) {
+        
+        //making sure it has a source because the source will be tested for accpet states
         if (start->get_from() == nullptr)
             return false;
         return start->get_from()->get_accpet() ? true : false;
+        
     }
     
     
@@ -55,6 +62,7 @@ bool traverse_nfa(edge<nfa_node>* start, string to_parse, int index)
         return result;
     }
     
+    //todo: why this doesn't work????
     string symbol, to_match;
     symbol = start->get_input();
     to_match = char_to_string(to_parse.at(index));
@@ -79,7 +87,7 @@ bool traverse_nfa(edge<nfa_node>* start, string to_parse, int index)
 
 void traverse_debug(edge<nfa_node>* start)
 {
-    print_symbol(start->get_input());
+    CC_DEBUG_OUT(start->get_input());
     nfa_node* node = start->get_to();
     for (auto edge : node->get_started())
     {

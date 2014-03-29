@@ -11,6 +11,11 @@
 
 #define CC_EPSILON ""
 
+#define CC_DEBUG (true)
+#define CC_DEBUG_OUT(a) \
+if (CC_DEBUG) \
+    cout << a << endl; \
+
 #include <string>
 #include <sstream>
 
